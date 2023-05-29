@@ -1,14 +1,12 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
 
 const app = express();
 const port = 3700;
 
-app.use(express.json({ limit: '300mb' }));
 app.use(cors());
-app.use(bodyParser.json());
+app.use(express.json());
 
 // Connect to MongoDB
 mongoose
@@ -34,7 +32,7 @@ const productSchema = new mongoose.Schema({
   details: String,
   metal: String,
   grams: String,
-  photo: String
+  photo: String 
 });
 
 // Create a Product model
@@ -103,7 +101,6 @@ app.get('/cart/cartlist', async (req, res) => {
       cartItems: items.map((item) => ({
         id: item.id,
         name: item.name,
-        photo: item.photo,
         price: item.price
       })),
       total
